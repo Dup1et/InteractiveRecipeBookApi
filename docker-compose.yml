@@ -47,6 +47,19 @@ services:
     networks:
       - default
 
+  adminer:
+    image: adminer:standalone
+    container_name: adminer.irb
+    restart: on-failure
+    links:
+      - mysql
+    ports:
+      - 127.0.0.1:${ADMINER_PORT}:8080
+    depends_on:
+      - mysql
+    networks:
+      - default
+
 networks:
   default:
     driver: bridge
