@@ -19,7 +19,8 @@ services:
       - default
 
   php-fpm:
-    image: php-fpm-image
+    build:
+      context: docker-compose/php-fpm
     container_name: php-fpm.irb
     restart: on-failure
     volumes:

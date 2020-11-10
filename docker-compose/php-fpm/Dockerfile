@@ -1,5 +1,7 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 RUN docker-php-ext-install pdo_mysql
+
+USER root
 
 EXPOSE 9000
