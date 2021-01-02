@@ -56,7 +56,7 @@ class RecipeController extends Controller
     {
         $recipe->update($request->validated());
 
-        return response()->json($recipe);
+        return response()->json(new RecipeDetailed($recipe));
     }
 
     /**
