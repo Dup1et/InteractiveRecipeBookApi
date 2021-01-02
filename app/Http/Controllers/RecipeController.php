@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Api\Recipe\CreateRecipeRequest;
 use App\Http\Requests\Api\Recipe\UpdateRecipeRequest;
+use App\Http\Resources\RecipeDetailed;
 use App\Http\Resources\RecipeShort;
 use App\Models\Recipe;
 use Exception;
@@ -53,14 +54,7 @@ class RecipeController extends Controller
      */
     public function update(UpdateRecipeRequest $request, Recipe $recipe)
     {
-        $recipe->update($request->only([
-            'title',
-            'description',
-            'preview',
-            'cooking_time',
-            'portions',
-            'language_id',
-        ]));
+        $recipe->update($request->validated());
 
         return response()->json($recipe);
     }
