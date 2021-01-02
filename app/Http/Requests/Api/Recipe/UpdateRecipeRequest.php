@@ -30,6 +30,7 @@ class UpdateRecipeRequest extends FormRequest
             'cooking_time' => 'sometimes|date_format:H:i:s',
             'portions' => 'integer',
             'language_id' => 'sometimes|integer|exists:App\Models\Language,id',
+            'body' => 'json',
         ];
     }
 }
