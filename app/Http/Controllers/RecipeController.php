@@ -24,17 +24,6 @@ class RecipeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param CreateRecipeRequest $request
-     * @return JsonResponse
-     */
-    public function create(CreateRecipeRequest $request)
-    {
-        return response()->json(Recipe::on()->create($request->validated()), 201);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param Recipe $recipe
@@ -43,6 +32,17 @@ class RecipeController extends Controller
     public function show(Recipe $recipe)
     {
         return response()->json($recipe);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CreateRecipeRequest $request
+     * @return JsonResponse
+     */
+    public function store(CreateRecipeRequest $request)
+    {
+        return response()->json(Recipe::on()->create($request->validated()), 201);
     }
 
     /**
