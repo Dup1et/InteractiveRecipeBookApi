@@ -33,7 +33,10 @@ class TestRecipeSeeder extends Seeder
                     'cooking_time' => $faker->time(),
                     'portions' => $faker->numberBetween(1, 5),
                     'language_id' => 1,
-                    'recipe_body_id' => $faker->unique()->numberBetween(),
+                    'body' => json_encode([
+                        'test_field1' => $faker->text('64'),
+                        'test_field2' => $faker->randomNumber(),
+                    ]),
                     'user_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
