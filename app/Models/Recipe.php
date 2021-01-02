@@ -18,7 +18,7 @@ class Recipe extends Model
         'cooking_time',
         'portions',
         'language_id',
-        'recipe_body_id',
+        'body',
         'user_id',
     ];
 
