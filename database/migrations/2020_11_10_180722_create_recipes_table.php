@@ -21,7 +21,7 @@ class CreateRecipesTable extends Migration
             $table->time('cooking_time');
             $table->unsignedTinyInteger('portions')->default(1);
             $table->unsignedBigInteger('language_id');
-            $table->unsignedBigInteger('recipe_body_id')->nullable();
+            $table->json('body');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
