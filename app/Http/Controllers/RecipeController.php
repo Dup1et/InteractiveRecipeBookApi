@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Api\Recipe\CreateRecipeRequest;
 use App\Http\Requests\Api\Recipe\UpdateRecipeRequest;
-use App\Http\Resources\RecipeDetailed;
-use App\Http\Resources\RecipeShort;
+use App\Http\Resources\RecipeDetailedResource;
+use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +20,7 @@ class RecipeController extends Controller
     public function index()
     {
         $recipes = Recipe::on()->with('language', 'user')->get();
-        return response()->json(RecipeShort::collection($recipes));
+        return response()->json(RecipeResource::collection($recipes));
     }
 
     /**
@@ -56,7 +56,7 @@ class RecipeController extends Controller
     {
         $recipe->update($request->validated());
 
-        return response()->json(new RecipeDetailed($recipe));
+        return response()->json(new RecipeDetailedResource($recipe));
     }
 
     /**

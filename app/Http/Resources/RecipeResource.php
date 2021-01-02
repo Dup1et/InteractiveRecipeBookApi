@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RecipeShort extends JsonResource
+class RecipeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,8 +22,8 @@ class RecipeShort extends JsonResource
             'preview' => $this->preview,
             'cookingTime' => $this->cooking_time,
             'portions' => $this->portions,
-            'language' => new Language($this->language),
-            'user' => new User($this->user),
+            'language' => new LanguageResource($this->language),
+            'user' => new UserResource($this->user),
             'publishedAt' => $this->created_at->format('d.m.Y H:i:s'),
         ];
     }
