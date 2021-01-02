@@ -25,7 +25,7 @@ Route::group(['prefix' => '/recipes'], function () {
     Route::get('/', [RecipeController::class, 'index']);
     Route::get('/{recipe}', [RecipeController::class, 'show']);
     Route::post('/', [RecipeController::class, 'create']);
-    Route::put('/{recipe}', [RecipeController::class, 'update']);
+    Route::match(['put', 'patch'], '/{recipe}', [RecipeController::class, 'update']);
     Route::delete('/{recipe}', [RecipeController::class, 'destroy']);
 });
 
