@@ -17,10 +17,9 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('google_id')->unique();
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('language_id');
-            $table->rememberToken();
+            $table->string('google_id')->unique()->nullable();
             $table->timestamps();
 
             $table->foreign('language_id')->on('languages')->references('id');
