@@ -3,7 +3,6 @@
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecipeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,8 +36,4 @@ Route::group(['prefix' => '/recipes'], function () {
     Route::post('/', [RecipeController::class, 'store']);
     Route::match(['put', 'patch'], '/{recipe}', [RecipeController::class, 'update']);
     Route::delete('/{recipe}', [RecipeController::class, 'destroy']);
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
