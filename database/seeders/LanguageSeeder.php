@@ -24,18 +24,18 @@ class LanguageSeeder extends Seeder
             $now = Carbon::now()->toDateTimeString();
 
             Language::on()->insert([
-               [
-                   'tag' => 'ru-RU',
+                [
+                    'tag' => 'en',
+                    'name' => 'English',
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+                [
+                   'tag' => 'ru',
                    'name' => 'Русский',
                    'created_at' => $now,
                    'updated_at' => $now,
-               ],
-               [
-                   'tag' => 'en-GB',
-                   'name' => 'English (United Kingdom)',
-                   'created_at' => $now,
-                   'updated_at' => $now,
-               ],
+                ],
             ]);
         });
     }
