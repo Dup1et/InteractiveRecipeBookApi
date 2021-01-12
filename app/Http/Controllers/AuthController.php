@@ -5,16 +5,25 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Resources\UserResource;
-use App\Models\Language;
-use App\Models\User;
+use App\Services\AuthService;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AuthController extends Controller
 {
+    protected $authService;
+
+    /**
+     * AuthController constructor.
+     * @param AuthService $authService
+     */
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
     /**
      * Redirect the user to the Google authentication page.
      *
@@ -32,7 +41,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Obtain the user information from Google.
+     * Obtain the user information from Google and log in user.
      *
      * @return JsonResponse
      */
@@ -40,68 +49,43 @@ class AuthController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
+            $user = $this->authService->findOrCreateUserWithGoogle($googleUser);
+            $token = $this->authService->login($user);
 
-            $user = User::on()->where('google_id', $googleUser->id)->first();
-
-            if ($user) {
-                $user->avatar = $googleUser->avatar;
-                $user->save();
-            } else {
-                $locale = isset($googleUser->user['locale']) ? $googleUser->user['locale'] : null;
-                $user = User::on()->create([
-                    'username' => $googleUser->nickname ?? $googleUser->name,
-                    'email' => $googleUser->email,
-                    'google_id' => $googleUser->id,
-                    'language_id' => $this->getLanguageIdForNewUser($locale),
-                    'api_token' => $googleUser->token,
-                    'avatar' => $googleUser->avatar
-                ]);
-            }
-
-            /** @var User $user */
-            $token = auth()->login($user);
-
-            return $this->respondWithToken($token);
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => $this->authService->getTokenType(),
+                'expires_in' => $this->authService->getTTL(),
+                'user' => new UserResource(auth()->user()),
+            ]);
         } catch (Exception $exception) {
-            return response()->json($exception->getMessage());
+            return response()->json(['message' => $exception->getMessage()]);
         }
     }
 
     /**
-     * Get the language id based on locale tag
+     * Refresh user access token
      *
-     * @param string $locale
-     * @return int
+     * @return string
      */
-    protected function getLanguageIdForNewUser($locale)
+    public function refresh()
     {
-        if (!$locale) {
-            $locale = 'en';
-        }
-        try {
-            return Language::on()
-                ->where('tag', 'like', "%$locale%")
-                ->first()
-                ->id;
-        } catch (ModelNotFoundException $exception) {
-            return 2;
-        }
-    }
+        $token = $this->authService->refresh();
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => new UserResource(auth()->user()),
+            'token_type' => $this->authService->getTokenType(),
+            'expires_in' => $this->authService->getTTL(),
         ]);
+    }
+
+    /**
+     * Log the user out
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json(['message' => 'Successfully logout']);
     }
 }

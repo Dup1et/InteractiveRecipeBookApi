@@ -22,6 +22,8 @@ Route::group(['prefix' => '/auth'], function () {
         Route::get('/google', [AuthController::class, 'loginWithGoogle']);
         Route::get('/google/callback', [AuthController::class, 'handleGoogleCallback']);
     });
+    Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+    Route::get('/refresh', [AuthController::class, 'refresh']);
 });
 
 Route::group(['prefix' => '/languages'], function () {
