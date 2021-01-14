@@ -30,7 +30,7 @@ class CreateRecipeRequest extends FormRequest
             'cooking_time' => 'required|date_format:H:i:s',
             'portions' => 'integer',
             'language_id' => 'required|integer|exists:App\Models\Language,id',
-            'recipe_body_id' => 'required|integer|unique:App\Models\Recipe,recipe_body_id',
+            'body' => 'json',
             'user_id' => 'required|integer|exists:App\Models\User,id',
         ];
     }
