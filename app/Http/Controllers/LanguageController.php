@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Language;
 use Illuminate\Http\Response;
 
+/**
+ * @group Languages
+ *
+ * Class LanguageController
+ * @package App\Http\Controllers
+ */
 class LanguageController extends Controller
 {
     /**

@@ -10,6 +10,12 @@ use App\Models\Recipe;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @group Recipes
+ *
+ * Class RecipeController
+ * @package App\Http\Controllers
+ */
 class RecipeController extends Controller
 {
     /**
@@ -25,6 +31,7 @@ class RecipeController extends Controller
 
     /**
      * Display the specified resource.
+     * @urlParam recipe integer required The ID of the recipe.
      *
      * @param Recipe $recipe
      * @return JsonResponse
@@ -36,6 +43,7 @@ class RecipeController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @authenticated
      *
      * @param CreateRecipeRequest $request
      * @return JsonResponse
@@ -47,6 +55,8 @@ class RecipeController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @authenticated
+     * @urlParam recipe integer required The ID of the recipe.
      *
      * @param UpdateRecipeRequest $request
      * @param Recipe $recipe
@@ -61,6 +71,8 @@ class RecipeController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @authenticated
+     * @urlParam recipe integer required The ID of the recipe.
      *
      * @param Recipe $recipe
      * @return JsonResponse

@@ -11,6 +11,12 @@ use Illuminate\Http\JsonResponse;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * @group Auth
+ *
+ * Class AuthController
+ * @package App\Http\Controllers
+ */
 class AuthController extends Controller
 {
     protected $authService;
