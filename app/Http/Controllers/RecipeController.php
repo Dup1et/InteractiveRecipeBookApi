@@ -38,7 +38,7 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        return response()->json($recipe);
+        return response()->json(new RecipeDetailedResource($recipe));
     }
 
     /**
@@ -50,7 +50,8 @@ class RecipeController extends Controller
      */
     public function store(CreateRecipeRequest $request)
     {
-        return response()->json(Recipe::on()->create($request->validated()), 201);
+        $recipe = Recipe::on()->create($request->validated());
+        return response()->json(new RecipeResource($recipe), 201);
     }
 
     /**
@@ -80,6 +81,7 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        return response()->json($recipe->delete(), 204);
+        $recipe->delete();
+        return response()->json(null, 204);
     }
 }
