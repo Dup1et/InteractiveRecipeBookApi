@@ -7,7 +7,7 @@ composer install
 Copy ```.env.example``` to ```.env```
 >Don't forget configure it!
 
-#Devserver
+# Devserver
 Change DB_HOST to "irb.mysql"
 
 Run devserver
