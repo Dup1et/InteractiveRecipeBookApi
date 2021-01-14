@@ -64,7 +64,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Refresh user access token
+     * Refresh user access token.
      *
      * @return string
      */
@@ -80,7 +80,10 @@ class AuthController extends Controller
     }
 
     /**
-     * Log the user out
+     * Log the user out.
+     * @authenticated
+     *
+     * @return JsonResponse
      */
     public function logout()
     {
