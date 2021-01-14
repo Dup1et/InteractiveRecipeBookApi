@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class TestUserSeeder extends Seeder
 {
@@ -29,7 +28,7 @@ class TestUserSeeder extends Seeder
             for ($i = 0; $i < 10; $i++) {
                 User::on()->insert([
                     'username' => $faker->userName,
-                    'password' => Hash::make('1q2w3e'),
+                    'email' => $faker->email,
                     'language_id' => 1,
                     'created_at' => $now,
                     'updated_at' => $now,
