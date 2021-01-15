@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LanguageResource;
 use App\Models\Language;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 
 /**
  * @group Languages
@@ -16,21 +17,23 @@ class LanguageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function index()
     {
-        return response(Language::all());
+        $languagesList = Language::on()->get();
+        return response()->json(LanguageResource::collection($languagesList));
     }
 
     /**
      * Display the specified resource.
+     * @urlParam language integer required The ID of the language.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Language  $language
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(Language $language)
     {
-        return response(Language::on()->findOrFail($id));
+        return response()->json(new LanguageResource($language));
     }
 }

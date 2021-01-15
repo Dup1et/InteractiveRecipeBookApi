@@ -27,7 +27,7 @@ Route::group(['prefix' => '/auth'], function () {
 
 Route::group(['prefix' => '/languages'], function () {
     Route::get('/', [LanguageController::class, 'index']);
-    Route::get('/{id}', [LanguageController::class, 'show']);
+    Route::get('/{language}', [LanguageController::class, 'show']);
 });
 
 Route::group(['prefix' => '/recipes'], function () {
