@@ -37,7 +37,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'verified_at' => 'datetime',
+        'created_at' => 'date:Y-m-d H:i:s',
+        'updated_at' => 'date:Y-m-d H:i:s',
     ];
 
     /**

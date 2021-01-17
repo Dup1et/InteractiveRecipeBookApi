@@ -22,6 +22,16 @@ class Recipe extends Model
         'user_id',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'date:Y-m-d H:i:s',
+        'updated_at' => 'date:Y-m-d H:i:s',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
