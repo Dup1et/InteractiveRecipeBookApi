@@ -41,6 +41,4 @@ class Recipe extends Model
     {
         return $this->belongsTo(Language::class, 'language_id');
     }
-
-    protected $dates = ['created_at', 'updated_at'];
 }
