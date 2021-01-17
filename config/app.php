@@ -232,4 +232,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
+    'pagination' => [
+        'page_size' => env('PAGINATION_PAGE_SIZE', 20)
+    ],
+
 ];
