@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\Api\LanguageController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RecipeController;
 use Illuminate\Support\Facades\Route;
 
 /*

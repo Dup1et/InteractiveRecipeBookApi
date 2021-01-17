@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\LanguageResource;
 use App\Models\Language;
 use Illuminate\Http\JsonResponse;

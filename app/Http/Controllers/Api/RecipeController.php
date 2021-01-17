@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Recipe\CreateRecipeRequest;
 use App\Http\Requests\Api\Recipe\UpdateRecipeRequest;
 use App\Http\Resources\RecipeDetailedResource;
