@@ -26,8 +26,10 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::on()->with('language', 'user')->get();
-        return response()->json(RecipeResource::collection($recipes));
+        $recipes = Recipe::on()
+            ->with('language', 'user')
+            ->paginate(config('app.pagination.page_size'));
+        return RecipeResource::collection($recipes)->toResponse(request());
     }
 
     /**
