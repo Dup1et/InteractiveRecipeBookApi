@@ -21,11 +21,6 @@ Generate app key
 php artisan key:generate
 ```
 
-Generate jwt secret key
-```bash
-php artisan jwt:secret
-```
-
 Run migrations with seeds
 ```bash
 php artisan migrate --seed
