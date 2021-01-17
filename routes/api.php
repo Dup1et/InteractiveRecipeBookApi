@@ -33,7 +33,9 @@ Route::group(['prefix' => '/languages'], function () {
 Route::group(['prefix' => '/recipes'], function () {
     Route::get('/', [RecipeController::class, 'index']);
     Route::get('/{recipe}', [RecipeController::class, 'show']);
-    Route::post('/', [RecipeController::class, 'store']);
-    Route::match(['put', 'patch'], '/{recipe}', [RecipeController::class, 'update']);
-    Route::delete('/{recipe}', [RecipeController::class, 'destroy']);
+    Route::middleware('auth')->group(function () {
+        Route::post('/', [RecipeController::class, 'store']);
+        Route::match(['put', 'patch'], '/{recipe}', [RecipeController::class, 'update']);
+        Route::delete('/{recipe}', [RecipeController::class, 'destroy']);
+    });
 });
